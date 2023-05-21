@@ -6,5 +6,5 @@ from myapp.views import HomeView, Register
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('register/', Register.as_view(), name='register')
-]
+    path('register', Register.as_view(), name='register')
+]   

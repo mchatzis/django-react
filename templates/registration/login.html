@@ -7,10 +7,16 @@
     <body>
         <h1>Please login:</h1>
         <form method="post">
-            {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">login</button>
-            <p> Not registered? Register <a href={% url 'register' %}>here</a></p>
+            <p> Not registered? Register <a href="{% url 'register' %}?next={{ next }}">here</a></p>
+            {% csrf_token %}
         </form>
+
+    {% if request.user.is_authenticated %}
+    <p>Is authenticated</p>
+    {% else %}
+    <p>Is not authenticated</p>
+    {% endif %}
     </body>
 </html>
