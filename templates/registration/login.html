@@ -12,11 +12,5 @@
             <p> Not registered? Register <a href="{% url 'register' %}?next={{ next }}">here</a></p>
             {% csrf_token %}
         </form>
-
-    {% if request.user.is_authenticated %}
-    <p>Is authenticated</p>
-    {% else %}
-    <p>Is not authenticated</p>
-    {% endif %}
     </body>
 </html>
