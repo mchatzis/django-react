@@ -2,7 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 function App(){
-  return <h1>Hello World!</h1>
+  const dep_choices = JSON.parse(document.getElementById('json-dep-choices').textContent);
+
+  return (
+    <>
+      <h1>Hello World!</h1>
+      <ul>
+        {dep_choices.map(choice => 
+          <li key={choice.id}>{choice.name}</li>)}
+      </ul>
+    </>
+  );
 }
 
 const container = document.getElementById('root')

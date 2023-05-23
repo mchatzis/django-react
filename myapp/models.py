@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Employee(models.Model):
     DEPARTMENT_CHOICES = [
-    ('marketing', 'Marketing',),
+    ('marketing', 'Marketing'),
     ('hr', 'Human Resources'),
     ('eng', 'Engineering'),
     ('sales', 'Sales'),
