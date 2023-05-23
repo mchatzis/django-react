@@ -4,26 +4,30 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from myapp.models import Employee
 
+
 class HomeView(TemplateView):
     template_name = "myapp/index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        department_choices = [{'id':c[0], 'name':c[1]} for c in Employee.DEPARTMENT_CHOICES]
+        department_choices = [
+            {'id': c[0], 'name': c[1]} for c in Employee.DEPARTMENT_CHOICES
+        ]
         context["department_choices"] = department_choices
         return context
+
 
 class Register(CreateView):
     template_name = "registration/register.html"
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
-    
+
     def get_success_url(self):
         next_page = self.request.GET.get('next', None)
         if next_page is not None:
-            return  reverse_lazy('login') + "?next=" + next_page
+            return reverse_lazy('login') + "?next=" + next_page
         super().get_success_url()
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['next'] = self.request.GET.get('next', None)

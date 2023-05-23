@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #user-generated
+    # user-generated
     'myapp',
 ]
 
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'djReact.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,5 +132,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Author added
-LOGIN_URL='login'
-LOGIN_REDIRECT_URL='/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
