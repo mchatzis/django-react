@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
-const URLS = {
-  LIST_EMPLOYEES: "{% url 'sapi:employees-list' %}",
-};
-console.log(URLS.LIST_EMPLOYEES)
 
 function App(){
   const [empData, setEmpData] = useState("")
 
   useEffect(()=> {
-      fetch('http://127.0.0.1:8000/api/employees/')
+      fetch(URLS.LIST_EMPLOYEES)
       .then(res => res.json())
       .then(json_data => JSON.stringify(json_data, null, 2))
       .then(data => setEmpData(data))
