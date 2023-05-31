@@ -11,10 +11,16 @@
     {% else %}
     <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
     {% endif %}
+    
 </head>
 <body>
     {{department_choices|json_script:'json-dep-choices'}}
     <div id='root'>
+    <script>
+        const URLS = {
+            LIST_EMPLOYEES: "{% url 'api:employees-list' %}",
+          };
+    </script>
     <script src="{% static 'index-bundle.js' %}"></script>
     </div>
 </body>

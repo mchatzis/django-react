@@ -1,18 +1,13 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
 from api.serializers import EmployeeSerializer
 from myapp.models import Employee
 
 
-
-class EmployeeAPIView(ListAPIView):
+class EmployeeViewSet(ModelViewSet):
     serializer_class = EmployeeSerializer
 
     def get_queryset(self):
-        emp_name = self.kwargs.get('name', None)
-        queryset = Employee.objects.all()
-
-        if emp_name:
-            return queryset.filter(name=emp_name)
-        else:
-            return queryset
+        return self.request.user.employees.all()
     
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
