@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
+const URLS = {
+  LIST_EMPLOYEES: "{% url 'sapi:employees-list' %}",
+};
+console.log(URLS.LIST_EMPLOYEES)
 
 function App(){
   const [empData, setEmpData] = useState("")
