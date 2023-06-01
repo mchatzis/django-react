@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
+import { EmployeeList } from './EmployeeList'
 
 
 function App(){
-  const [empData, setEmpData] = useState("")
+  const [empData, setEmpData] = useState([])
 
   useEffect(()=> {
       fetch(URLS.LIST_EMPLOYEES)
       .then(res => res.json())
-      .then(json_data => JSON.stringify(json_data, null, 2))
       .then(data => setEmpData(data))
       .catch(err => console.error(err));
     }
@@ -18,14 +18,13 @@ function App(){
 
   return (
     <>
-      <h1>Hello World!</h1>
+      <h4>Possible Department choices:</h4>
       <ul>
         {dep_choices.map(choice => 
           <li key={choice.id}>{choice.name}</li>)}
       </ul>
-      <pre>
-        {empData}
-      </pre>
+      <h4>List of employees:</h4>
+      <EmployeeList emp_list={empData}/>
     </>
   );
 }
