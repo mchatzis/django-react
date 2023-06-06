@@ -56,6 +56,7 @@ paths:
         name: id
         schema:
           type: integer
+        description: A unique integer value identifying this employee.
         required: true
       tags:
       - employees
@@ -77,6 +78,7 @@ paths:
         name: id
         schema:
           type: integer
+        description: A unique integer value identifying this employee.
         required: true
       tags:
       - employees
@@ -110,6 +112,7 @@ paths:
         name: id
         schema:
           type: integer
+        description: A unique integer value identifying this employee.
         required: true
       tags:
       - employees
@@ -142,6 +145,7 @@ paths:
         name: id
         schema:
           type: integer
+        description: A unique integer value identifying this employee.
         required: true
       tags:
       - employees
