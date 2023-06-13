@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { EmployeeList } from './EmployeeList'
+import { EmployeesApi } from '../api-client/apis/EmployeesApi'
+import { Configuration } from '../api-client/runtime'
 
 
 function App(){
   const [empData, setEmpData] = useState([])
-
+  
   useEffect(()=> {
-      fetch(URLS.LIST_EMPLOYEES)
-      .then(res => res.json())
+      const apiInst = new EmployeesApi(new Configuration({basePath:'http://127.0.0.1:8000'}))
+      apiInst.employeesList()
       .then(data => setEmpData(data))
       .catch(err => console.error(err));
     }

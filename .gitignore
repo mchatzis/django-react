@@ -160,5 +160,8 @@ cython_debug/
 #.idea/
 
 # MANUALLY ADDED
-node_modules/
-static/
+/node_modules/
+/static/
+/openapi-generator-cli.jar
+
+

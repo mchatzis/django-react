@@ -1,0 +1,10 @@
+.openapi-generator-ignore
+apis/EmployeesApi.ts
+apis/SchemaApi.ts
+apis/index.ts
+index.ts
+models/DepartmentEnum.ts
+models/Employee.ts
+models/PatchedEmployee.ts
+models/index.ts
+runtime.ts
