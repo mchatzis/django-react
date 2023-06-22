@@ -11,7 +11,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         department_choices = [
-            {'id': c[0], 'name': c[1]} for c in Employee.DEPARTMENT_CHOICES
+            {'value': c[0], 'name': c[1]} for c in Employee.DEPARTMENT_CHOICES
         ]
         context["department_choices"] = department_choices
         return context
