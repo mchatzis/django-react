@@ -1,6 +1,11 @@
 import React, { useState } from "react"
 import { DepartmentEnum } from '../api-client/models'
 
+const block_display = {
+    display: "block",
+    padding: "5px",
+    margin: "10px"
+}
 
 export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
     const [name, setName] = useState()
@@ -14,11 +19,6 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
         fetch_emp_list();
     }
 
-    const block_display = {
-        display: "block",
-        padding: "5px",
-        margin: "10px"
-    }
 
     return (
         <section>
@@ -34,13 +34,14 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
                     value={department}
                     style={block_display}
                     onChange={event => setDepartment(event.target.value)}>
-            {dep_choices.map(choice => 
+            {
+            Object.entries(dep_choices).map(([db_name, name]) => 
                                 <option 
-                                    id={choice.name} 
-                                    key={choice.name}
-                                    value={choice.value}
+                                    id={db_name} 
+                                    key={db_name}
+                                    value={db_name}
                                 >
-                                    {choice.name}
+                                    {name}
                                 </option>
                                 )
             }

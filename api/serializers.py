@@ -7,7 +7,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         read_only=True,
         default=serializers.CurrentUserDefault()
     )
-    
+
     class Meta:
         model = Employee
         fields = '__all__'

@@ -32,6 +32,7 @@ function App({apiInst}){
     <>
       <h4>List of employees:</h4>
       <EmployeeList emp_list={empData}/>
+      <h4>Add new employee:</h4>
       <CreateEmployeeWidget 
           apiInst={apiInst} 
           fetch_emp_list={fetch_emp_list} 

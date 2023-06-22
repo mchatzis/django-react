@@ -7,7 +7,6 @@ from myapp.models import Employee
 class EmployeeViewSet(ModelViewSet):
     serializer_class = EmployeeSerializer
     
-
     def get_queryset(self):
         # User reverse foreign key relationship user -> employee model
         user = self.request.user
