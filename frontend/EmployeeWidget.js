@@ -4,7 +4,12 @@ import { DepartmentEnum } from '../api-client/models'
 const block_display = {
     display: "block",
     padding: "5px",
-    margin: "10px"
+    margin: "10px",
+}
+
+const err_display = {
+    display: "block",
+    paddingLeft: "10px"
 }
 
 export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
@@ -12,13 +17,22 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
     const [department, setDepartment] = useState(DepartmentEnum.Sales)
     const [salary, setSalary] = useState()
 
+    const [errors, setErrors] = useState({})
+
     async function createEmployee(emp){
         await apiInst.employeesCreate(emp)
-        .catch(err => console.log(err));
-  
+        .catch(err => {
+                var code = err.response.status
+                console.log(code)
+                if (code === 400) {
+                    err.response.json()
+                    .then(data => setErrors(data)) 
+                }
+
+            }
+        );
         fetch_emp_list();
     }
-
 
     return (
         <section>
@@ -26,7 +40,8 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
             <input 
                     style={block_display} 
                     type="text"
-                    onChange={event => setName(event.target.value)}/>
+                    onChange={event => setName(event.target.value)}
+                    placeholder={errors.name}/>
 
             <label htmlFor="department">Department</label>
             <select 
@@ -50,7 +65,8 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
             <label>Salary</label>
             <input  style={block_display} 
                     type="number"
-                    onChange={event => setSalary(event.target.value)}/>
+                    onChange={event => setSalary(event.target.value)}
+                    placeholder={errors.salary}/>
 
             <button onClick={() => 
                 createEmployee({employee: {name:name, department:department, salary:parseInt(salary)}})}>

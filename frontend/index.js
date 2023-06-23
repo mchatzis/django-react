@@ -20,7 +20,7 @@ function App({apiInst}){
 
   function fetch_emp_list(){
     apiInst.employeesList()
-    .then(data => setEmpData(data))
+    .then(res => setEmpData(res))
     .catch(err => console.error(err));
   }
 
