@@ -4,12 +4,15 @@ import { DepartmentEnum } from '../api-client/models'
 const block_display = {
     display: "block",
     padding: "5px",
-    margin: "10px",
+    margin: "10px"
 }
 
 const err_display = {
     display: "block",
-    paddingLeft: "10px"
+    paddingLeft: "10px",
+    marginTop:"-10px",
+    marginBottom:"10px",
+    color:"red"
 }
 
 export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
@@ -40,8 +43,8 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
             <input 
                     style={block_display} 
                     type="text"
-                    onChange={event => setName(event.target.value)}
-                    placeholder={errors.name}/>
+                    onChange={event => setName(event.target.value)}/>
+            {errors.name ? <span style={err_display}> {errors.name} </span> : null}
 
             <label htmlFor="department">Department</label>
             <select 
@@ -61,15 +64,19 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
                                 )
             }
             </select>
+            {errors.department}
 
             <label>Salary</label>
             <input  style={block_display} 
                     type="number"
-                    onChange={event => setSalary(event.target.value)}
-                    placeholder={errors.salary}/>
+                    onChange={event => setSalary(event.target.value)}/>
+            {errors.salary ? <span style={err_display}> {errors.salary} </span> : null}
 
-            <button onClick={() => 
-                createEmployee({employee: {name:name, department:department, salary:parseInt(salary)}})}>
+            <button 
+                onClick={() => 
+                createEmployee({employee: {name:name, department:department, salary:parseInt(salary)}})}
+                style={{marginTop:"10px"}}
+            >
                     Click for new employee
             </button>
         </section>
