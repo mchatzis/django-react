@@ -1,14 +1,15 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 from api.serializers import EmployeeSerializer
 from myapp.models import Employee
 
 
 
 class EmployeeViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = EmployeeSerializer
     
     def get_queryset(self):
-        # User reverse foreign key relationship user -> employee model
         user = self.request.user
         if user.is_authenticated:
             return Employee.objects.filter(user=user)

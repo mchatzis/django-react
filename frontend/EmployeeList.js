@@ -16,5 +16,4 @@ export function EmployeeList({emp_list}){
             </>
         )
     }
-    
 }

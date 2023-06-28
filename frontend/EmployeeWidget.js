@@ -29,7 +29,7 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
                 console.log(code)
                 if (code === 400) {
                     err.response.json()
-                    .then(data => setErrors(data)) 
+                    .then(msg => setErrors(msg)) 
                 }
 
             }
@@ -64,7 +64,6 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
                                 )
             }
             </select>
-            {errors.department}
 
             <label>Salary</label>
             <input  style={block_display} 
