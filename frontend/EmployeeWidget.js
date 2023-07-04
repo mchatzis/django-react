@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 import { DepartmentEnum } from '../api-client/models'
 
-const block_display = {
+const blockDisplay = {
     display: "block",
     padding: "5px",
     margin: "10px"
 }
 
-const err_display = {
+const errDisplay = {
     display: "block",
     paddingLeft: "10px",
     marginTop:"-10px",
@@ -16,14 +16,25 @@ const err_display = {
 }
 
 export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
-    const [name, setName] = useState()
+    const [name, setName] = useState('')
     const [department, setDepartment] = useState(DepartmentEnum.Sales)
-    const [salary, setSalary] = useState()
+    const [salary, setSalary] = useState('')
 
     const [errors, setErrors] = useState({})
 
-    async function createEmployee(emp){
-        await apiInst.employeesCreate(emp)
+    function clearFields(){
+        setName('');
+        setDepartment(DepartmentEnum.Sales);
+        setSalary('');
+    }
+
+    function createEmployee(emp){
+        apiInst.employeesCreate(emp)
+        .then(() => {
+                fetch_emp_list();
+                clearFields();
+            }
+        )
         .catch(err => {
                 var code = err.response.status
                 console.log(code)
@@ -33,24 +44,24 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
                 }
 
             }
-        );
-        fetch_emp_list();
+        )
     }
 
     return (
         <section>
             <label>Name</label>
             <input 
-                    style={block_display} 
+                    style={blockDisplay} 
                     type="text"
+                    value={name}
                     onChange={event => setName(event.target.value)}/>
-            {errors.name ? <span style={err_display}> {errors.name} </span> : null}
+            {errors.name ? <span style={errDisplay}> {errors.name} </span> : null}
 
             <label htmlFor="department">Department</label>
             <select 
                     id="department" 
                     value={department}
-                    style={block_display}
+                    style={blockDisplay}
                     onChange={event => setDepartment(event.target.value)}>
             {
             Object.entries(dep_choices).map(([db_name, name]) => 
@@ -66,10 +77,11 @@ export function CreateEmployeeWidget({apiInst, fetch_emp_list, dep_choices}){
             </select>
 
             <label>Salary</label>
-            <input  style={block_display} 
+            <input  style={blockDisplay} 
                     type="number"
+                    value={salary}
                     onChange={event => setSalary(event.target.value)}/>
-            {errors.salary ? <span style={err_display}> {errors.salary} </span> : null}
+            {errors.salary ? <span style={errDisplay}> {errors.salary} </span> : null}
 
             <button 
                 onClick={() => 
